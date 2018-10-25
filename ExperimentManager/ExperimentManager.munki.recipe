@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the latest version of ExperimentManager from Box and imports it into ExperimentManager.</string>
+	<string>Downloads the latest version of ExperimentManager and imports it into ExperimentManager.</string>
 	<key>Identifier</key>
 	<string>com.github.apeelsciences.recipes.munki.ExperimentManager</string>
 	<key>Input</key>
@@ -35,6 +35,9 @@
 			<true/>
 			<key>unattended_uninstall</key>
 			<true/>
+			<key>force_install_after_date</key>
+			<date>2018-10-24T13:00:00Z</date>
+	   		
 			
 		</dict>
 	</dict>
