@@ -22,6 +22,8 @@
             <string>The Zoom app provides cloud-hosted video conferencing, plus online meetings and group messaging.</string>
             <key>developer</key>
             <string>Zoom Video Communications, Inc.</string>
+            <key>category</key>
+            <string>Communications</string>
             <key>display_name</key>
             <string>Zoom</string>
             <key>name</key>
