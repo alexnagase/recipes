@@ -3,13 +3,15 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads latest DurometerRecorder zip file from Box and builds a package. The installer package includes a preinstall script that will check for an existing DurometerRecorder.app in /Applications and remove it if found.</string>
+    <string>DurometerRecorder packager</string>
     <key>Identifier</key>
     <string>com.github.apeelsciences.recipes.pkg.DurometerRecorder</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
         <string>DurometerRecorder</string>
+        <key>PATH</key>
+        <string>/Applications/%NAME%.app</string>
     </dict>
     <key>ParentRecipe</key>
     <string>com.github.apeelsciences.recipes.download.DurometerRecorder</string>
@@ -40,24 +42,27 @@
                 <key>archive_path</key>
                 <string>%pathname%</string>
                 <key>destination_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%</string>
+                <string>%pkgroot%/Applications</string>
                 <key>purge_destination</key>
                 <true/>
             </dict>
         </dict>
+        
         <dict>
             <key>Comment</key>
-            <string>Get v version from the app contents</string>
+            <string>Get DurometerRecorder version from the app contents</string>
             <key>Processor</key>
             <string>Versioner</string>
             <key>Arguments</key>
             <dict>
                 <key>input_plist_path</key>
-                <string>%RECIPE_CACHE_DIR%/DurometerRecorder/DurometerRecorder.app/Contents/Info.plist</string>
+                <string>%RECIPE_CACHE_DIR%/DurometerRecorder/%PATH%/Contents/Info.plist</string>
                 <key>plist_version_key</key>
                 <string>CFBundleShortVersionString</string>
             </dict>
         </dict>
+
+        
         <dict>
             <key>Processor</key>
             <string>PkgCreator</string>
@@ -67,12 +72,25 @@
                 <dict>
                     <key>pkgname</key>
                     <string>%NAME%</string>
+                    <key>pkgdir</key>
+                    <string>%RECIPE_CACHE_DIR%</string>
                     <key>version</key>
                     <string>%version%</string>
                     <key>id</key>
                     <string>com.apeel.durometerrecorder</string>
                     <key>options</key>
                     <string>purge_ds_store</string>
+                    <key>chown</key>
+                    <array>
+                        <dict>
+                            <key>path</key>
+                            <string>Applications</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>admin</string>
+                        </dict>
+                    </array>
                     
                 </dict>
             </dict>
